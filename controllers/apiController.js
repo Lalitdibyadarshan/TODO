@@ -10,4 +10,32 @@ module.exports = function(app) {
                 res.send(result);
             })
         })
+
+        app.post('/api/todo', function(req, res) {
+            if(req.body.id) {
+                Todo.findByIdAndUpdate(req.body.id, {
+                    todo: req.body.todo,
+                    isDone: req.body.isDone,
+                    hasAttachment: req.body.hasAttachment
+                }, function(err, result) {
+                    if(err) throw err;
+
+                    res.send('Successfully updated !!!')
+                })
+            }
+
+            else {
+                var newTodo = Todo({
+                    username: 'test',
+                    todo: req.body.todo,
+                    isDone: req.body.isDone,
+                    hasAttachment: req.body.hasAttachment
+                })
+                newTodo.save(function(err) {
+                    if(!err){
+                        res.send('Successfully added !!!')
+                    } 
+                })
+            }
+        })
 }
