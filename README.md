@@ -1,2 +1,2 @@
 # TODO
-This is a MEAN app
+This is a Node + Express + Mongo test app
